@@ -1,8 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import { useFavorites } from '../../context/FavoritesContext'
+import { useTheme } from '../../context/ThemeContext'
 
 const NavBar = () => {
   const { favoritesCount } = useFavorites()
+  const { theme, setTheme, themes } = useTheme()
 
   return (
     <nav className="navbar">
@@ -26,6 +28,22 @@ const NavBar = () => {
         >
           Favorites ({favoritesCount})
         </NavLink>
+      </div>
+      <div className="theme-switcher" aria-label="Theme switcher">
+        {themes.map((option) => (
+          <button
+            key={option.id}
+            type="button"
+            className={
+              theme === option.id
+                ? "theme-option active"
+                : "theme-option"
+            }
+            onClick={() => setTheme(option.id)}
+          >
+            {option.label}
+          </button>
+        ))}
       </div>
     </nav>
   )

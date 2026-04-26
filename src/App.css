@@ -190,12 +190,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 16px;
   padding: 18px 32px;
   border-bottom: 1px solid var(--border);
   background:
     linear-gradient(135deg, color-mix(in srgb, var(--accent) 18%, transparent), transparent 45%),
-    color-mix(in srgb, var(--bg) 92%, #09090f 8%);
+    color-mix(in srgb, var(--bg) 92%, var(--surface-dark-mix) 8%);
   backdrop-filter: blur(14px);
 }
 
@@ -216,9 +217,8 @@
   height: 40px;
   border-radius: 12px;
   color: white;
-  background:
-    linear-gradient(135deg, #8b1cf1, #4c0b8a);
-  box-shadow: 0 12px 24px rgba(76, 11, 138, 0.35);
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--brand-end) 38%, transparent);
 }
 
 .navbar-links {
@@ -252,8 +252,47 @@
 
 .nav-link.active {
   color: white;
-  background: linear-gradient(135deg, #7a18d7, #4b0b88);
-  box-shadow: 0 10px 22px rgba(76, 11, 138, 0.28);
+  background: linear-gradient(135deg, var(--active-start), var(--active-end));
+  box-shadow: 0 10px 22px var(--active-shadow);
+}
+
+.theme-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 84%, var(--accent) 16%);
+}
+
+.theme-option {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.theme-option:hover {
+  color: var(--text-h);
+  background: color-mix(in srgb, var(--bg) 78%, var(--accent) 22%);
+  transform: translateY(-1px);
+}
+
+.theme-option.active {
+  color: white;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
 }
 
 .home {
@@ -301,7 +340,11 @@
 }
 
 .favorite-button.active {
-  background: linear-gradient(135deg, #1f7a42, #14532d);
+  background: linear-gradient(
+    135deg,
+    var(--favorite-active-start),
+    var(--favorite-active-end)
+  );
 }
 
 .show-grid {
@@ -355,6 +398,11 @@
 
   .navbar-links {
     justify-content: center;
+  }
+
+  .theme-switcher {
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .home {
